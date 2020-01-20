@@ -1,8 +1,7 @@
 package org.elevador.command;
 
-import org.elevador.api.IElevador1;
-import org.elevador.api.IElevador2;
 import org.elevador.impl.Elevador1;
+import org.elevador.impl.Informacion;
 import org.elevador.api.*;
 
 import java.util.ArrayList;
@@ -82,6 +81,9 @@ public class EntornoCommand {
     }
     
     public void mir1(int destino) throws InterruptedException {
+    	
+    	int pisoOrigen = this.Elevador1Svc.getPisoActualElevador();
+    	
     	if(this.Elevador1Svc.getEstadoActualElevador().equals(EstadoElevador.EsperandoInstruccion)) {
     		
     		if(destino>5 || destino<-1) {
@@ -95,13 +97,37 @@ public class EntornoCommand {
     	else {
     		System.out.println("-- Acceso denegado. Primero solicite el elevador hasta su piso actual.");
     	}
+    	
+    	if(pisoOrigen == 1) 
+    		this.MecanismoPiso1Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 2)
+    		this.MecanismoPiso2Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 3)
+    		this.MecanismoPiso3Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 4)
+    		this.MecanismoPiso4Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 5)
+    		this.MecanismoPiso5Svc.setEstaActivadoElBoton(false);
+    	
     	System.out.println("------------------------------------------------");
     	
-    	//Poner proceso de cola aqui
     	//Llevar al ascensor al piso de espera
+    	if(!Informacion.ColaEspera.isEmpty()) {
+    		int PisoSolicitudEspera = Informacion.ColaEspera.remove();
+    		
+    		System.out.println("-- Requerimiento de espera desde el piso " + PisoSolicitudEspera + " esta siendo atendido." );
+    		this.llamarElevador(PisoSolicitudEspera);
+    	}
+    	else {
+    		this.Elevador1Svc.desplazarElevadorADefecto();
+    		this.Elevador1Svc.setEstadoActualElevador(EstadoElevador.Disponible);
+    	}
     }
     
     public void mir2(int destino) throws InterruptedException {
+    	
+    	int pisoOrigen = this.Elevador2Svc.getPisoActualElevador();
+    	
     	if(this.Elevador2Svc.getEstadoActualElevador().equals(EstadoElevador.EsperandoInstruccion)) {
     		
     		if(destino>5 || destino<-1) {
@@ -115,6 +141,30 @@ public class EntornoCommand {
     	else {
     		System.out.println("-- Acceso denegado. Primero solicite el elevador hasta su piso actual.");
     	}
+    	
+    	if(pisoOrigen == 1) 
+    		this.MecanismoPiso1Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 2)
+    		this.MecanismoPiso2Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 3)
+    		this.MecanismoPiso3Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 4)
+    		this.MecanismoPiso4Svc.setEstaActivadoElBoton(false);
+    	else if(pisoOrigen == 5)
+    		this.MecanismoPiso5Svc.setEstaActivadoElBoton(false);
+    	
+    	//Llevar al ascensor al piso de espera
+    	if(!Informacion.ColaEspera.isEmpty()) {
+    		int PisoSolicitudEspera = Informacion.ColaEspera.remove();
+    		
+    		System.out.println("-- Requerimiento de espera desde el piso " + PisoSolicitudEspera + " esta siendo atendido." );
+    		this.llamarElevador(PisoSolicitudEspera);
+    	}
+    	else {
+    		this.Elevador2Svc.desplazarElevadorADefecto();
+    		this.Elevador2Svc.setEstadoActualElevador(EstadoElevador.Disponible);
+    	}
+    	
     	System.out.println("------------------------------------------------");
     }
     
@@ -135,6 +185,7 @@ public class EntornoCommand {
     	
     	if(idElevador == -1) {
     		System.out.println("Los elevadores estan ocupados, espere un momento a que alguno se desocupe...");
+    		Informacion.ColaEspera.add(PisoLlamada);
     	}
     	else {
     		System.out.println("El elevador " + idElevador + " esta en camino...");
@@ -153,28 +204,60 @@ public class EntornoCommand {
     }
     
     public void llamar1() throws InterruptedException {
-    	this.MecanismoPiso1Svc.setEstaActivadoElBoton(true);
-    	llamarElevador(this.MecanismoPiso1Svc.getPisoMecanismo());
+    	if(this.MecanismoPiso1Svc.isEstaActivadoElBoton()) {
+    		System.out.println("-- Beep beep. Su peticion esta en proceso...");
+    	}
+    	else
+    	{
+    		this.MecanismoPiso1Svc.setEstaActivadoElBoton(true);
+        	llamarElevador(this.MecanismoPiso1Svc.getPisoMecanismo());
+    	}
     }
     
     public void llamar2() throws InterruptedException {
-    	this.MecanismoPiso2Svc.setEstaActivadoElBoton(true);
-    	llamarElevador(this.MecanismoPiso2Svc.getPisoMecanismo());
+    	if(this.MecanismoPiso2Svc.isEstaActivadoElBoton()) {
+    		System.out.println("-- Beep beep. Su peticion esta en proceso...");
+    	}
+    	else
+    	{
+    		this.MecanismoPiso2Svc.setEstaActivadoElBoton(true);
+    		System.out.println("Aqui....");
+        	llamarElevador(this.MecanismoPiso2Svc.getPisoMecanismo());
+    	}
     }
     
     public void llamar3() throws InterruptedException {
-    	this.MecanismoPiso3Svc.setEstaActivadoElBoton(true);
-    	llamarElevador(this.MecanismoPiso3Svc.getPisoMecanismo());
+    	if(this.MecanismoPiso3Svc.isEstaActivadoElBoton()) {
+    		System.out.println("-- Beep beep. Su peticion esta en proceso...");
+    	}
+    	else
+    	{
+    		this.MecanismoPiso3Svc.setEstaActivadoElBoton(true);
+        	llamarElevador(this.MecanismoPiso3Svc.getPisoMecanismo());
+    	}
     }
     
     public void llamar4() throws InterruptedException {
-    	this.MecanismoPiso4Svc.setEstaActivadoElBoton(true);
-    	llamarElevador(this.MecanismoPiso4Svc.getPisoMecanismo());
+    	if(this.MecanismoPiso4Svc.isEstaActivadoElBoton()) {
+    		System.out.println("-- Beep beep. Su peticion esta en proceso...");
+    	}
+    	else
+    	{
+    		this.MecanismoPiso4Svc.setEstaActivadoElBoton(true);
+        	llamarElevador(this.MecanismoPiso4Svc.getPisoMecanismo());
+    	}
     }
     
     public void llamar5() throws InterruptedException {
-    	this.MecanismoPiso5Svc.setEstaActivadoElBoton(true);
-    	llamarElevador(this.MecanismoPiso5Svc.getPisoMecanismo());
+    	
+    	if(this.MecanismoPiso5Svc.isEstaActivadoElBoton()) {
+    		System.out.println("-- Beep beep. Su peticion esta en proceso...");
+    	}
+    	else
+    	{
+    		this.MecanismoPiso5Svc.setEstaActivadoElBoton(true);
+        	llamarElevador(this.MecanismoPiso5Svc.getPisoMecanismo());
+    	}
     }
     
     public void e1() {

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<repository xmlns="http://www.osgi.org/xmlns/repository/v1.0.0" name="org.elevador.impl" increment="1578290591861">
+<repository xmlns="http://www.osgi.org/xmlns/repository/v1.0.0" name="org.elevador.impl" increment="1578369170405">
   <resource>
     <capability namespace="osgi.identity">
       <attribute name="osgi.identity" value="org.elevador.impl.provider"/>
@@ -48,10 +48,10 @@
       <attribute name="objectClass" value="org.elevador.api.IMecanismoPiso5" type="List&lt;String&gt;"/>
     </capability>
     <capability namespace="osgi.content">
-      <attribute name="size" value="25489" type="Long"/>
+      <attribute name="size" value="25622" type="Long"/>
       <attribute name="url" value="generated/org.elevador.impl.provider.jar"/>
       <attribute name="mime" value="application/vnd.osgi.bundle"/>
-      <attribute name="osgi.content" value="41298381728F172788DB7A34E86B141D3D390613F57992DA846EC63B2AF0B391"/>
+      <attribute name="osgi.content" value="87A5A568EFC25FEC3024C671060ABF93BB62D00B93883262A1E0F211312F33A1"/>
     </capability>
     <capability namespace="bndtools.workspace">
       <attribute name="bndtools.workspace" value="file:/C:/Users/Daniel/eclipse-workspace"/>
@@ -122,10 +122,10 @@
       <attribute name="objectClass" value="org.elevador.command.EntornoCommand" type="List&lt;String&gt;"/>
     </capability>
     <capability namespace="osgi.content">
-      <attribute name="size" value="30387" type="Long"/>
+      <attribute name="size" value="31563" type="Long"/>
       <attribute name="url" value="generated/org.elevador.impl.command.jar"/>
       <attribute name="mime" value="application/vnd.osgi.bundle"/>
-      <attribute name="osgi.content" value="3FF8423776B62A8D94E9A0481061ECABE9BA39A54A160ECCF8CEFE6BABA73859"/>
+      <attribute name="osgi.content" value="09E4B59D053F91199859536DB3EF4733019D08691712C10210210C1C8F98E493"/>
     </capability>
     <capability namespace="bndtools.workspace">
       <attribute name="bndtools.workspace" value="file:/C:/Users/Daniel/eclipse-workspace"/>

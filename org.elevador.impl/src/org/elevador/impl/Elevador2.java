@@ -141,10 +141,10 @@ public class Elevador2 implements IElevador2 {
 		        	Thread.sleep(1000);
 		        }
 				System.out.println("-- El elevador " + this.getIdElevador() + " ha llegado al piso destino numero " + this.getPisoDestinoElevador());
-				
-				desplazarElevadorADefecto();
 			}
+			
 			this.setEstadoActualElevador(EstadoElevador.Disponible);
+
         } catch (Exception e) {
         	System.out.println("Error en el elevador " + this.getIdElevador() + ". Se quedo detenido en el piso" + this.getPisoActualElevador());
         	System.out.println("Ahora el elevador " + this.getIdElevador() + " esta disponible desde el piso " + this.getPisoActualElevador());
@@ -165,7 +165,7 @@ public class Elevador2 implements IElevador2 {
 			            this.setPisoActualElevador(i);
 			        	Thread.sleep(1000);
 			        }
-					System.out.println("-- El elevador ha retornado al piso defecto en la planta numero" + this.getPisoDestinoElevador());
+					System.out.println("-- El elevador ha retornado al piso defecto en la planta numero " + this.getPisoDefectoElevador());
 				}
 				else {
 					
@@ -175,7 +175,7 @@ public class Elevador2 implements IElevador2 {
 			        	this.setPisoActualElevador(i);
 			        	Thread.sleep(1000);
 			        }
-					System.out.println("-- El elevador " + this.getIdElevador() + " ha retornado al piso defecto en la planta numero " + this.getPisoDestinoElevador());
+					System.out.println("-- El elevador " + this.getIdElevador() + " ha retornado al piso defecto en la planta numero " + this.getPisoDefectoElevador());
 					
 				}
 			}

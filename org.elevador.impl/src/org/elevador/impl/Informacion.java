@@ -1,5 +1,8 @@
 package org.elevador.impl;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Informacion {
 
 	public static int IdElevador1 = 1;
@@ -12,5 +15,7 @@ public class Informacion {
 	
 	public static int PisoMinimoEdificio = 1;
 	public static int PisoMaximoEdificio = 5;
+	
+	public static Queue<Integer> ColaEspera = new LinkedList<Integer>();
 
 }
